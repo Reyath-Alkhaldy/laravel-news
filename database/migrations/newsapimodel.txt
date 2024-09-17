@@ -1,0 +1,27 @@
+class Article extends Model
+{
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+
+    public function source()
+    {
+        return $this->belongsTo(Source::class, 'source_id');
+    }
+
+    public function translations()
+    {
+        return $this->hasMany(ArticleTranslation::class, 'article_id');
+    }
+}
+
+class ArticleTranslation extends Model
+{
+    protected $primaryKey = ['article_id', 'locale'];
+    public $incrementing = false;
+    protected $fillable = ['author', 'title', 'description', 'url', 'url_to_image', 'content'];
+
+    public function article()
+    {
+        return $this->belongsTo(Article::class, 'article_id');
+    }
+}

@@ -1,0 +1,114 @@
+CREATE TABLE sources (
+    id VARCHAR(50) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    url VARCHAR(255),
+    category VARCHAR(255),
+    language VARCHAR(10),
+    country VARCHAR(10)
+);
+
+CREATE TABLE articles (
+    id VARCHAR(255) PRIMARY KEY,
+    source_id VARCHAR(50),
+    author VARCHAR(255),
+    title VARCHAR(255),
+    description TEXT,
+    url TEXT,
+    url_to_image TEXT,
+    published_at DATETIME,
+    content TEXT,
+    FOREIGN KEY (source_id) REFERENCES sources(id)
+);
+CREATE TABLE categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) UNIQUE NOT NULL
+);
+CREATE TABLE article_source (
+    article_id VARCHAR(255),
+    source_id VARCHAR(50),
+    PRIMARY KEY (article_id, source_id),
+    FOREIGN KEY (article_id) REFERENCES articles(id),
+    FOREIGN KEY (source_id) REFERENCES sources(id)
+);
+/////////////////////////
+
+CREATE TABLE sources (
+    id VARCHAR(50) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    url VARCHAR(255),
+    category VARCHAR(255),
+    language VARCHAR(10),
+    country VARCHAR(10)
+);
+CREATE TABLE articles (
+    id VARCHAR(255) PRIMARY KEY,
+    source_id VARCHAR(50),
+    published_at DATETIME,
+    FOREIGN KEY (source_id) REFERENCES sources(id)
+);
+CREATE TABLE categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) UNIQUE NOT NULL
+);
+CREATE TABLE article_translations (
+    article_id VARCHAR(255),
+    locale VARCHAR(10), -- 'en' for English, 'ar' for Arabic
+    author VARCHAR(255),
+    title VARCHAR(255),
+    description TEXT,
+    url TEXT,
+    url_to_image TEXT,
+    content TEXT,
+    PRIMARY KEY (article_id, locale),
+    FOREIGN KEY (article_id) REFERENCES articles(id)
+);
+/////////////////////
+php artisan make:migration create_sources_table
+php artisan make:migration create_articles_table
+php artisan make:migration create_categories_table
+php artisan make:migration create_article_translations_table
+Schema::create('sources', function (Blueprint $table) {
+    $table->string('id')->primary();
+    $table->string('name');
+    $table->text('description')->nullable();
+    $table->string('url')->nullable();
+    $table->string('category')->nullable();
+    $table->string('language', 10)->nullable();
+    $table->string('country', 10)->nullable();
+    $table->timestamps();
+});
+Schema::create('articles', function (Blueprint $table) {
+    $table->string('id')->primary();
+    $table->string('source_id');
+    $table->dateTime('published_at')->nullable();
+    $table->foreign('source_id')->references('id')->on('sources');
+    $table->timestamps();
+});
+
+Schema::create('categories', function (Blueprint $table) {
+    $table->id();
+    $table->string('name')->unique();
+    $table->timestamps();
+});
+
+Schema::create('article_translations', function (Blueprint $table) {
+    $table->string('article_id');
+    $table->string('locale', 10); // e.g., 'en' or 'ar'
+    $table->string('author')->nullable();
+    $table->string('title')->nullable();
+    $table->text('description')->nullable();
+    $table->text('url')->nullable();
+    $table->text('url_to_image')->nullable();
+    $table->text('content')->nullable();
+    $table->primary(['article_id', 'locale']);
+    $table->foreign('article_id')->references('id')->on('articles');
+    $table->timestamps();
+});
+
+php artisan make:model Source
+php artisan make:model Article
+php artisan make:model Category
+php artisan make:model ArticleTranslation
+
