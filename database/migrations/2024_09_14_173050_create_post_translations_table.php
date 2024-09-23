@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('post_translations', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('post_id')->constrained('posts')->cascadeOnDelete();
-            $table->string('locale')->index();
-            $table->string('title')->nullable();
-            $table->text('content')->nullable();
-            $table->text('small_desc')->nullable();
-            $table->unique(['post_id','locale']);
-            $table->timestamps();
-        });
+        // Schema::create('post_translations', function (Blueprint $table) {
+            // $table->id();
+            // $table->foreignId('post_id')->constrained('posts')->cascadeOnDelete();
+            // $table->string('locale')->index();
+            // $table->string('title')->nullable();
+            // $table->text('content')->nullable();
+            // $table->text('small_desc')->nullable();
+            // $table->unique(['post_id','locale']);
+            // $table->timestamps();
+        // });
     }
 
     /**
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('post_translations');
+        // Schema::dropIfExists('post_translations');
     }
 };
