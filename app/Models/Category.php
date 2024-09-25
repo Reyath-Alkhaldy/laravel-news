@@ -11,6 +11,10 @@ class Category extends Model
 {
     use HasFactory;
     protected $fillable = ['image','parent','name'];
+    public function rssItems()
+    {
+        return $this->hasMany(RssItem::class);
+    }
 
 }
 

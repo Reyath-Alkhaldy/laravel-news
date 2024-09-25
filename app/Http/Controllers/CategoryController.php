@@ -27,9 +27,10 @@ class CategoryController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Category $category)
     {
-        //
+        $rssItems = $category->rssItems;
+        return  view('dash.category',compact('rssItems'));
     }
 
     /**

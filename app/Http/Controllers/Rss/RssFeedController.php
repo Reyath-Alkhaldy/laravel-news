@@ -10,7 +10,7 @@ use App\Trait\RssFeedReaderTrait;
 use Vedmant\FeedReader\Facades\FeedReader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-  
+
 // laravel
 class RssFeedController
 {
@@ -38,7 +38,7 @@ class RssFeedController
 
     public function fetchAndStore($feedUrl = 'https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml')
     {
-        $feedUrl = 'https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml';
+        // $feedUrl = 'https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml';
         // قراءة الـ RSS من الرابط باستخدام المكتبة
         $feed = FeedReader::read($feedUrl);
 
@@ -65,8 +65,10 @@ class RssFeedController
             }
 
             // استخراج التصنيف (category) إذا كان متاحاً
-            $categoryName = $item->get_category() ? $item->get_category()->get_label() : 'Uncategorized';
-            $category = Category::firstOrCreate(['name' => $categoryName]);
+            // $categoryName = $item->get_category() ? $item->get_category()->get_label() : 'Uncategorized';
+            // $category = Category::firstOrCreate(['name' => $categoryName]);
+            // TODO
+            $category = Category::firstOrCreate(['name' => $feed->get_title()]);
 
             // تخزين العنصر (الخبر) في جدول rss_items
             $rssItem = $this->createRessItem($item, $rssFeed->id, $category->id);
@@ -79,17 +81,10 @@ class RssFeedController
             }
 
             foreach ($tags as $tagName) {
-                 $tag = Tag::firstOrCreate(['name' => Str::lower($tagName)]);  // Create or get existing tag
+                $tag = Tag::firstOrCreate(['name' => Str::lower($tagName)]);  // Create or get existing tag
                 $rssItem->tags()->attach($tag->id);               // Attach tag to RSS item
-            } 
-            // if ($tags) {
-            //     foreach ($tags as $tagName) {
-            //         $tag = Tag::firstOrCreate(['name' => $tagName]);
-            //         $rssItem->tags()->attach($tag->id);  // ربط العلامة بالخبر
-            //     }
-            // }
+            }
         }
-
         return response()->json(['message' => 'RSS feed processed and stored successfully']);
     }
 

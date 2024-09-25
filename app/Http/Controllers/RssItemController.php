@@ -12,7 +12,9 @@ class RssItemController
      */
     public function index()
     {
-        //
+        $rssItems = RssItem::paginate(8);
+        // return $rssItems;
+        return  view('dash.index',compact('rssItems'));
     }
 
     /**
