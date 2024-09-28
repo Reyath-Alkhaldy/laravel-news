@@ -22,6 +22,14 @@ class RssItem extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'rss_item_tags');
+        return $this->belongsToMany(
+            Tag::class,
+            'rss_item_tags',
+            'rss_item_id',
+            'tag_id',
+            'id',
+            'id',
+        );
     }
+    
 }

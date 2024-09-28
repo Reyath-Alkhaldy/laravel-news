@@ -15,12 +15,15 @@ use Illuminate\Support\Str;
 class RssFeedController
 {
     use RssFeedReaderTrait;
+   public $feedUrl = 'https://news.google.com/rss?hl=en-US&gl=US&ceid=US';
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $f = FeedReader::read('https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml');
+        $f = FeedReader::read( $this->feedUrl);
+        // $f = FeedReader::read('https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml');
         // $f = FeedReader::read('https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml');
 
         // $f = FeedReader::read('https://www.aljazeera.net/aljazeerarss/a7c186be-1baa-4bd4-9d80-a84db769f779/73d0e1b4-532f-45ef-b135-bfdff8b8cab9');

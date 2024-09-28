@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 // use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
@@ -14,6 +15,13 @@ class Category extends Model
     public function rssItems()
     {
         return $this->hasMany(RssItem::class);
+    }
+    public function trendings()
+    {
+        return $this->rssItems()->take(6)->latest('pub_date');
+    }
+    public function scopeGoogleNewsTrendings(Builder $builder){
+        $builder->where('name', 'Top stories - Google News');
     }
 
 }

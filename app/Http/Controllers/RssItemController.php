@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\RssItem;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class RssItemController
 {
@@ -12,9 +14,40 @@ class RssItemController
      */
     public function index()
     {
-        $rssItems = RssItem::paginate(8);
-        // return $rssItems;
-        return  view('dash.index',compact('rssItems'));
+        //  $trendings = Category::googleNewsTrendings()->first();
+        ////
+        $categoriesNames = ['NYT &gt; World News', 'Top stories - Google News', 'NYT &gt; U.S. News', 'NYT &gt; Sports', 'NYT &gt; Technology', 'NYT &gt; Business'];
+        ////
+        $categories = Category::whereIn('name', $categoriesNames)
+            ->whereHas('rssItems', function ($query) {
+                $query->havingRaw('count(*)>= 8');
+            })->with('rssItems', function ($query) {
+                $query->limit(8)->latest();
+            })
+            ->select(['id', 'name'])
+            ->limit(6)
+            ->get();
+        ////
+        $worldNews = $categories[1];
+        $trendings = $categories[0];
+        $USNews = $categories[2];
+        $sports = $categories[5];
+        $technology = $categories[4];
+        $business = $categories[3];
+        // dd($worldNews);
+        ////
+        return  view(
+            'dash.index',
+            compact(
+                'worldNews',
+                'trendings',
+                'categories',
+                'USNews',
+                'sports',
+                'technology',
+                'business'
+            )
+        );
     }
 
     /**

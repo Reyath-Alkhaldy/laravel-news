@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('content')->nullable();
             $table->text('description')->nullable();
             $table->string('image_url', 800)->nullable(); 
+            $table->string('video_url', 800)->nullable(); 
             $table->dateTime('pub_date')->nullable(); 
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->foreignId('rss_feed_id')->constrained('rss_feeds')->cascadeOnDelete();

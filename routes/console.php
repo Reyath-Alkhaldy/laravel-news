@@ -11,6 +11,9 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote')->hourly();
 
 Schedule::call(function () {
+    //this category  {{'Top stories - Google News' === 'Trending'}}
+    app(RssFeedController::class)->fetchAndStore('https://news.google.com/rss?hl=en-US&gl=US&ceid=US');
+
     app(RssFeedController::class)->fetchAndStore();
     app(RssFeedController::class)->fetchAndStore('https://rss.nytimes.com/services/xml/rss/nyt/World.xml');
     app(RssFeedController::class)->fetchAndStore('https://rss.nytimes.com/services/xml/rss/nyt/US.xml');
@@ -29,7 +32,7 @@ Schedule::call(function () {
     app(RssFeedController::class)->fetchAndStore('https://feeds.bbci.co.uk/news/rss.xml');
     app(RssFeedController::class)->fetchAndStore('https://www.aljazeera.com/xml/rss/all.xml');
     app(RssFeedController::class)->fetchAndStore('https://rss.cnn.com/rss/cnn_latest.rss');
-    app(RssFeedController::class)->fetchAndStore('http://feeds.reuters.com/reuters/topNews'); 
+    app(RssFeedController::class)->fetchAndStore('http://feeds.reuters.com/reuters/topNews');
     app(RssFeedController::class)->fetchAndStore('https://feeds.skynews.com/feeds/rss/home.xml');
 })->everyFiveMinutes();
 

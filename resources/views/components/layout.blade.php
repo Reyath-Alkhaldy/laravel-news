@@ -1,10 +1,10 @@
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Index - ZenBlog Bootstrap Template</title>
+    <title>{{ $title }}</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -27,6 +27,7 @@
 
     <!-- Main CSS File -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+    @stack('styles')
     <!-- =======================================================
   * Template Name: ZenBlog
   * Template URL: https://bootstrapmade.com/zenblog-bootstrap-blog-template/
@@ -39,8 +40,9 @@
 <body class="index-page">
 
     @include('dash.layouts.header')
+    {{-- {{ $hello ?? null }} --}}
     <main class="main">
-        @yield('main')
+        {{ $slot }}
     </main>
 
     @include('dash.layouts.footor')
@@ -57,10 +59,8 @@
     <script src="assets/vendor/php-email-form/validate.js"></script>
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
     <!-- Main JS File -->
     <script src="assets/js/main.js"></script>
-
+    @stack('scripts')
 </body>
-
-</html> --}}
+</html>

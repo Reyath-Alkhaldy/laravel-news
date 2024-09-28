@@ -12,11 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rss_item_tags', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('rss_item_id')->constrained('rss_items')->cascadeOnDelete();
             $table->foreignId('tag_id')->constrained('tags')->cascadeOnDelete();
-            $table->unique(['rss_item_id','tag_id']);
-            $table->timestamps();
+            $table->primary(['rss_item_id','tag_id']);
         });
     }
 

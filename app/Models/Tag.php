@@ -11,11 +11,20 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+
     protected $fillable = ['name'];
 
     public function rssItems()
     {
-        return $this->belongsToMany(RssItem::class, 'rss_item_tags');
+        return $this->belongsToMany(
+            RssItem::class,
+            'rss_item_tags',
+            'tag_id',
+            'rss_item_id',
+            'id',
+            'id',
+        );
     }
 }
 
