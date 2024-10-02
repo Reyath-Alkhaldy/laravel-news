@@ -3,49 +3,49 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\RssFeed;
 use App\Models\RssItem;
+use App\Repository\RssItemRepository;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class RssItemController
 {
+    public function __construct(public RssItemRepository $rssItemRepository) {}
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //  $trendings = Category::googleNewsTrendings()->first();
-        ////
-        $categoriesNames = ['NYT &gt; World News', 'Top stories - Google News', 'NYT &gt; U.S. News', 'NYT &gt; Sports', 'NYT &gt; Technology', 'NYT &gt; Business'];
-        ////
-        $categories = Category::whereIn('name', $categoriesNames)
-            ->whereHas('rssItems', function ($query) {
-                $query->havingRaw('count(*)>= 8');
-            })->with('rssItems', function ($query) {
-                $query->limit(8)->latest();
+        // $categoriesNames = ['NYT &gt; World News', 'Top stories - Google News', 'NYT &gt; U.S. News', 'NYT &gt; Sports', 'NYT &gt; Technology', 'NYT &gt; Business'];
+        $categories = collect($this->rssItemRepository->get());
+        $worldNews = $categories->firstWhere('name', 'NYT &gt; World News');
+        $USNews = $categories->firstWhere('name', 'NYT &gt; U.S. News');
+        $sports = $categories->firstWhere('name', 'NYT &gt; Sports');
+        $technology = $categories->firstWhere('name', 'NYT &gt; Technology');
+        $business = $categories->firstWhere('name', 'NYT &gt; Business');
+        $trendings =  RssFeed::where('title', 'Top stories - Google News')
+            ->
+            // whereHas('categories', function ($query) {
+            //     // $query->havingRaw('count(*)>= 6');
+            // })->
+            with('categories', function ($query) {
+                $query->whereHas('rssItems', function ($query) {
+                    $query->havingRaw('count(*)>= 1');
+                })->with('rssItems', function ($query) {
+                    $query->limit(1)->latest();
+                })->limit(8)->latest();
             })
-            ->select(['id', 'name'])
-            ->limit(6)
-            ->get();
-        ////
-        $worldNews = $categories[1];
-        $trendings = $categories[0];
-        $USNews = $categories[2];
-        $sports = $categories[5];
-        $technology = $categories[4];
-        $business = $categories[3];
-        // dd($worldNews);
-        ////
+            ->first();
         return  view(
             'dash.index',
             compact(
                 'worldNews',
                 'trendings',
-                'categories',
                 'USNews',
                 'sports',
                 'technology',
-                'business'
+                'business',
             )
         );
     }
@@ -69,9 +69,10 @@ class RssItemController
     /**
      * Display the specified resource.
      */
-    public function show(RssItem $rssItem)
+    public function show(string  $id)
     {
-        //
+        $rssItem = $this->rssItemRepository->show($id);
+        return  view('dash.single-post', compact('rssItem'));
     }
 
     /**

@@ -8,7 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class RssItem extends Model
 {
     use HasFactory;
-   protected $fillable = ['rss_feed_id', 'title', 'description', 'link','content','image_url', 'pub_date', 'category_id'];
+    protected $fillable = [
+        'rss_feed_id',
+        'title',
+        'description',
+        'link',
+        // 'content',
+        'image_url',
+        'video_url',
+        'author',
+        'pub_date',
+        'category_id'
+    ];
 
     public function rssFeed()
     {
@@ -31,5 +42,4 @@ class RssItem extends Model
             'id',
         );
     }
-    
 }

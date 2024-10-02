@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('link');
-            $table->text('content')->nullable();
+            // $table->text('content')->nullable();
             $table->text('description')->nullable();
+            $table->string('author')->nullable();  // Add a nullable column for the author
             $table->string('image_url', 800)->nullable(); 
             $table->string('video_url', 800)->nullable(); 
-            $table->dateTime('pub_date')->nullable(); 
+            $table->timestamp('pub_date')->nullable(); 
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->foreignId('rss_feed_id')->constrained('rss_feeds')->cascadeOnDelete();
             $table->timestamps();

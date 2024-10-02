@@ -12,12 +12,16 @@ class RssFeed extends Model
         'title',
         'link',
         'description',
-        'publication_date',
-        'source'
+        'source',
+        'image_url'
     ];
 
     public function items()
     {
         return $this->hasMany(RssItem::class);
+    }
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
     }
 }

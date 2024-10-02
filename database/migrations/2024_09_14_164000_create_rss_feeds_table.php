@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('rss_feeds', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('link');
+            $table->text('link')->unique();
+            $table->string('image_url', 800)->nullable();
             $table->text('description')->nullable();
             $table->text('source')->nullable();
-            $table->dateTime('pub_date')->nullable(); 
             // $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
 
             // $table->dateTime('publication_date')->nullable(); 

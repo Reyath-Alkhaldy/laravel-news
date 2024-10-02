@@ -28,9 +28,14 @@ class CategoryController
      * Display the specified resource.
      */
     public function show(Category $category)
-    {
-        $rssItems = $category->rssItems;
-        return  view('dash.category',compact('rssItems'));
+    { 
+        $categoryName = $category->name;
+        $rssItems = $category->rssItems()->paginate();
+        // dd($rssItems);
+        // return $rssItems;
+        
+        // dd($category);
+        return  view('dash.category',compact('rssItems','categoryName'));
     }
 
     /**

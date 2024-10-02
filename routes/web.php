@@ -9,28 +9,29 @@ use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/fetch-rss/{feedUrl}', [RssFeedController::class, 'fetchAndStore']);
-Route::get('/fetch-rss/feedUrl', [RssFeedController::class, 'fetchAndStore']);
+// Route::get('/fetch-rss/feedUrl', [RssFeedController::class, 'fetchAndStore']);
+Route::get('/fetch-rss/feedUrl', [RssFeedController::class, 'fetchAndStoreWithGoogle']); 
+// Route::get('/fetch-rss/feedUrl', [RssFeedController::class, 'fetchRssFeed']);
+
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return view('dash.index');
+
+Route::group(['prefix' => '/'], function () {
+    Route::resource('/news', RssItemController::class);
+    Route::resource('news/categories', CategoryController::class)
+    ->names('news.categories');
 });
 
-Route::group(['prefix' => 'news', 'as' => 'news.'], function () {
-    Route::resource('', RssItemController::class);
-    Route::resource('categories', CategoryController::class);
-});
 
 
 
 
-
-Route::group(['prefix' => 'dash', 'as' => 'dash.'], function () {
-    Route::apiResource('settings', SettingController::class);
-});
+// Route::group(['prefix' => 'dash', 'as' => 'dash.'], function () {
+//     Route::apiResource('settings', SettingController::class);
+// });
 
 
 

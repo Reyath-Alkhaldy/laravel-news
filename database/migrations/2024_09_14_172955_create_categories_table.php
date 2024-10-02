@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('image')->nullable();
-            $table->string('name');
-            $table->foreignId('parent')->nullable()->constrained('categories')->nullOnDelete();
+            $table->string('name')->index();
+            // $table->foreignId('parent_id')->nullable()->constrained('categories')->nullOnDelete();
+            $table->foreignId('rss_feed_id')->nullable()->constrained('rss_feeds')->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

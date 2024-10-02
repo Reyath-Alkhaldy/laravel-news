@@ -27,14 +27,14 @@
 </script>
 
               <div class="swiper-wrapper">
-                  @if ($worldNews->rssItems)
+                  @if ($worldNews)
                       @foreach ($worldNews->rssItems as $item)
                           {{-- {{dd($worldNews->rssItems)}} --}}
                           {{-- <div class="swiper-slide" style="background-image: url('assets/img/post-slide-1.jpg');"> --}}
                           <div class="swiper-slide" style="background-image: url({{ $item->image_url ?? '' }});">
                               <div class="content">
-                                  <h2><a href="single-post.html"> {{ $item->title }}</a></h2>
-                                  <p> {{ $item->content }}.</p>
+                                  <h2><a href="{{ route('news.show', $item->id) }}"> {{ $item->title }}</a></h2>
+                                  <p> {{ $item->description }}.</p>
                               </div>
                           </div>
                       @endforeach
