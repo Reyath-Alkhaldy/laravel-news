@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="{{$rssItem->title}}">
 
     <main class="main">
 
@@ -9,7 +9,7 @@
                 <nav class="breadcrumbs">
                     <ol>
                         <li><a href="{{ route('news.index') }}">Home</a></li>
-                        <li class="current">Single Post</li>
+                        <li class="current">{{$rssItem->category->name}}</li>
                     </ol>
                 </nav>
             </div>
@@ -27,7 +27,7 @@
                             <article class="article">
 
                                 <div class="post-img">
-                                    <img src="{{$rssItem->image_url}}" alt="" class="img-fluid">
+                                    <img src="{{$rssItem->image_url}}"  alt="{{ $rssItem->title }}" loading="lazy" class="img-fluid">
                                 </div>
 
                                 <h2 class="title">{{$rssItem->title}}</h2>

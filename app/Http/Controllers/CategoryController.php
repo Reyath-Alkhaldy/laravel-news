@@ -14,6 +14,14 @@ class CategoryController
     {
         return Category::all();
     }
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -36,6 +44,14 @@ class CategoryController
         
         // dd($category);
         return  view('dash.category',compact('rssItems','categoryName'));
+    }
+
+     /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Category $Category)
+    {
+        //
     }
 
     /**

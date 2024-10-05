@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Category;
 use App\Models\Setting;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,10 +24,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Paginator::useBootstrapFive();
-        Paginator::useBootstrapFour();
+        if (!(app()->runningInConsole())) {
+            Paginator::useBootstrapFour();
+            Blade::withoutDoubleEncoding();
+            $categories = Category::all();
+            view()->share(['categories' => $categories]);
+        }
 
-        $categories = Category::all();
-        view()->share(['categories'=> $categories]);
 
         // $settings =     Setting::checkSettings();
         // view()->share(['settings'=> $settings]);

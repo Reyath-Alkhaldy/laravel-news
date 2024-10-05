@@ -5,7 +5,7 @@ namespace App\Http\Trait;
 use App\Models\RssFeed;
 use App\Models\RssItem;
 use Illuminate\Support\Carbon;
-
+use Illuminate\Support\Str;
 trait RssFeedReaderTrait
 {
     private function createRssFeeds($xmlArray,$feedUrl){
@@ -22,6 +22,7 @@ trait RssFeedReaderTrait
         return RssItem::create([
             'rss_feed_id' => $rss_feed_id,
             'title' => $item['title'],
+            'slug' => Str::slug($item['title'],'-'),
             'description' => $item['description'],
             // 'image_url' => $imageUrl,
             // 'video_url' => $videoUrl,
@@ -68,6 +69,7 @@ trait RssFeedReaderTrait
         return RssItem::create([
             'rss_feed_id' => $rss_feed_id,
             'title' => $item->get_title(),
+            'slug' => Str::slug($item->get_title(),'-'),
             // 'author' => $item->get_author(),
             'description' => $item->get_description(),
             'image_url' => $imageUrl,

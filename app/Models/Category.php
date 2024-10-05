@@ -11,9 +11,13 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-    protected $fillable = ['image', 'name','rss_feed_id'
-    //  'parent_id'
-];
+    protected $fillable = [
+        'image',
+        'name',
+        'rss_feed_id',
+        'slug'
+        //  'parent_id'
+    ];
     public function rssItems()
     {
         return $this->hasMany(RssItem::class);
@@ -37,6 +41,10 @@ class Category extends Model
     public function scopeGoogleNewsTrendings(Builder $builder)
     {
         $builder->where('name', 'Top stories - Google News');
+    }
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 }
 

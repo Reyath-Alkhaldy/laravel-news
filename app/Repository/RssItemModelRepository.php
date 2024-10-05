@@ -11,7 +11,7 @@ class RssItemModelRepository implements RssItemRepository{
      */
     public function get()
     {
-        $categoriesNames = ['NYT &gt; World News', 'Google News', 'NYT &gt; U.S. News', 'NYT &gt; Sports', 'NYT &gt; Technology', 'NYT &gt; Business'];
+        $categoriesNames = ['World News', 'Google News', 'U.S. News', 'Sports', 'Technology', 'Business'];
         ////
         $categories = Category::whereIn('name', $categoriesNames)
             ->whereHas('rssItems', function ($query) {
@@ -19,7 +19,7 @@ class RssItemModelRepository implements RssItemRepository{
             })->with('rssItems', function ($query) {
                 $query->limit(8)->latest();
             })
-            ->select(['id', 'name'])
+            ->select(['id', 'name','slug'])
             ->limit(6)
             ->get();
             return $categories;

@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('rss_items', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title')->index();
+            $table->string('slug')->unique();
             $table->text('link');
             // $table->text('content')->nullable();
             $table->text('description')->nullable();

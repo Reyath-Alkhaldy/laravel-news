@@ -12,7 +12,7 @@ Artisan::command('inspire', function () {
 
 Schedule::call(function () {
     //this category  {{'Top stories - Google News' === 'Trending'}}
-    app(RssFeedController::class)->fetchAndStoreWithGoogle('https://news.google.com/rss?hl=en-US&gl=US&ceid=US');
+    // app(RssFeedController::class)->fetchAndStoreWithGoogle('https://news.google.com/rss?hl=en-US&gl=US&ceid=US');
 
     app(RssFeedController::class)->fetchAndStore('https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml');
     app(RssFeedController::class)->fetchAndStore('https://rss.nytimes.com/services/xml/rss/nyt/World.xml');
@@ -31,8 +31,8 @@ Schedule::call(function () {
 
     app(RssFeedController::class)->fetchAndStore('https://feeds.bbci.co.uk/news/rss.xml');
     // app(RssFeedController::class)->fetchAndStore('https://www.aljazeera.com/xml/rss/all.xml');
-    app(RssFeedController::class)->fetchAndStore('https://rss.cnn.com/rss/cnn_latest.rss');
-    app(RssFeedController::class)->fetchAndStore('http://feeds.reuters.com/reuters/topNews');
+    // app(RssFeedController::class)->fetchAndStore('https://rss.cnn.com/rss/cnn_latest.rss');
+    // app(RssFeedController::class)->fetchAndStore('http://feeds.reuters.com/reuters/topNews');
     app(RssFeedController::class)->fetchAndStore('https://feeds.skynews.com/feeds/rss/home.xml');
 })->everyMinute();
 

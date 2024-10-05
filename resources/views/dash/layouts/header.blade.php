@@ -34,7 +34,7 @@
         <a href="{{ route('news.index') }}" class="logo d-flex align-items-center me-auto me-xl-0">
             <!-- Uncomment the line below if you also wish to use an image logo -->
             <!-- <img src="assets/img/logo.png" alt=""> -->
-            <h1 class="sitename">News Summary</h1>
+            <h1 class="sitename">{{ $title }}</h1>
         </a>
 
         <nav id="navmenu" class="navmenu">
@@ -46,10 +46,14 @@
                             class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul class="dropdown-menu">
                         <div class="scrollable-dropdown">
-                            @foreach ($categories as $category)
-                                <li><a href="{{ route('news.categories.show', $category) }}">{{ $category->name }}</a>
-                                </li>
-                            @endforeach
+                            @if ($categories)
+                                @foreach ($categories as $category)
+                                    <li><a
+                                            href="{{ route('news.categories.show',  $category) }}">{{ $category->name }}</a>
+                                    </li>
+                                @endforeach
+                            @endif
+
                         </div>
 
                     </ul>

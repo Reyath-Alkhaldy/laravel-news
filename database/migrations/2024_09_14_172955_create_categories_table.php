@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('image')->nullable();
             $table->string('name')->index();
+            $table->string('slug')->unique();
             // $table->foreignId('parent_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->foreignId('rss_feed_id')->nullable()->constrained('rss_feeds')->cascadeOnDelete();
             $table->softDeletes();

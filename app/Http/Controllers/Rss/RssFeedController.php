@@ -7,13 +7,9 @@ use App\Models\Category;
 use App\Models\RssFeed;
 use App\Models\RssItem;
 use App\Models\Tag;
-use Carbon\Carbon;
 use Vedmant\FeedReader\Facades\FeedReader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use willvincent\Feeds\Facades\FeedsFacade;
-use Illuminate\Support\Facades\Response;
-// laravel
 class RssFeedController
 {
     use RssFeedReaderTrait;
@@ -43,10 +39,10 @@ class RssFeedController
     {
         // $feedUrl = 'https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml';
         // $feedUrl = 'https://rss.nytimes.com/services/xml/rss/nyt/World.xml';
-        // $feedUrl = 'https://www.aljazeera.com/xml/rss/all.xml';
+        // $feedUrl = 'http://feeds.reuters.com/reuters/topNews';
         // قراءة الـ RSS من الرابط باستخدام المكتبة
         $feed = FeedReader::read($feedUrl);
-        // dd  ($feed->get_items());
+        // dd  ($feed);
 
         // $xmlString = $feed->get_items()[0]->get_feed()->get_raw_data();
         ////////////////////////////////////////////
@@ -55,8 +51,9 @@ class RssFeedController
             return response()->json(['message' => 'Unable to fetch RSS feed'], 404);
         }
         // تخزين الـ RSS feed في جدول rss_feeds
+        $title = Str::replace('NYT &gt; ', '', $feed->get_title());
         $rssFeed = RssFeed::firstOrCreate([
-            'title' => $feed->get_title(),
+            'title' => $title,
             'link' =>  $feedUrl,
             'source' => $feed->get_base(),
             'image_url' => $feed->get_image_url(),
@@ -65,9 +62,12 @@ class RssFeedController
         ]);
         // استخراج التصنيف (category) إذا كان متاحاً
         // $categoryName = $item->get_category() ? $item->get_category()->get_label() : 'Uncategorized';
+        $name = Str::replace('NYT &gt; ', '', $feed->get_title());
         $category = Category::firstOrCreate([
-            'name' => $feed->get_title(),
+            'name' =>   $name,
+            'slug' => Str::slug(  $name,'-'),
             'rss_feed_id' => $rssFeed->id,
+
         ]);
         foreach ($feed->get_items() as $item) {
             // التحقق مما إذا كان العنصر موجود بالفعل لتجنب التكرار
@@ -119,6 +119,7 @@ class RssFeedController
         foreach ($xmlArray['channel']['item'] as $item) {
             $category = Category::firstOrCreate([
                 'name' => $item['source'],
+                'slug' => Str::slug((string)$item['source'],'-'),
                 'rss_feed_id' => $rssFeed->id,
             ]);
             // التحقق مما إذا كان العنصر موجود بالفعل لتجنب التكرار
@@ -140,24 +141,7 @@ class RssFeedController
         }
         return response()->json(['message' => 'RSS feed processed and stored successfully']);
     }
-    // Helper function to convert array to XML format
-    protected function toXml($data, $rootElement = '<rss>', $xml = null)
-    {
-        if ($xml === null) {
-            $xml = new \SimpleXMLElement($rootElement);
-        }
-
-        foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                $new_object = $xml->addChild(is_numeric($key) ? 'item' : $key);
-                $this->toXml($value, $rootElement, $new_object);
-            } else {
-                $xml->addChild(is_numeric($key) ? 'item' : $key, htmlspecialchars($value));
-            }
-        }
-
-        return $xml->asXML();
-    }
+   
     /**
      * Show the form for creating a new resource.
      */

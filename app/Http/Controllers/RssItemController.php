@@ -17,13 +17,13 @@ class RssItemController
      */
     public function index()
     {
-        // $categoriesNames = ['NYT &gt; World News', 'Top stories - Google News', 'NYT &gt; U.S. News', 'NYT &gt; Sports', 'NYT &gt; Technology', 'NYT &gt; Business'];
+        // $categoriesNames = ['World News', 'Top stories - Google News', 'U.S. News', 'Sports', 'Technology', 'Business'];
         $categories = collect($this->rssItemRepository->get());
-        $worldNews = $categories->firstWhere('name', 'NYT &gt; World News');
-        $USNews = $categories->firstWhere('name', 'NYT &gt; U.S. News');
-        $sports = $categories->firstWhere('name', 'NYT &gt; Sports');
-        $technology = $categories->firstWhere('name', 'NYT &gt; Technology');
-        $business = $categories->firstWhere('name', 'NYT &gt; Business');
+        $worldNews = $categories->firstWhere('name', 'World News');
+        $USNews = $categories->firstWhere('name', 'U.S. News');
+        $sports = $categories->firstWhere('name', 'Sports');
+        $technology = $categories->firstWhere('name', 'Technology');
+        $business = $categories->firstWhere('name', 'Business');
         $trendings =  RssFeed::where('title', 'Top stories - Google News')
             ->
             // whereHas('categories', function ($query) {
@@ -69,16 +69,17 @@ class RssItemController
     /**
      * Display the specified resource.
      */
-    public function show(string  $id)
+    public function show(RssItem $news)
     {
-        $rssItem = $this->rssItemRepository->show($id);
+        // dd($news);
+        $rssItem = $this->rssItemRepository->show(id: $news->id);
         return  view('dash.single-post', compact('rssItem'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(RssItem $rssItem)
+    public function edit(RssItem $slug)
     {
         //
     }
@@ -86,7 +87,7 @@ class RssItemController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, RssItem $rssItem)
+    public function update(Request $request, RssItem $slug)
     {
         //
     }
@@ -94,7 +95,7 @@ class RssItemController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(RssItem $rssItem)
+    public function destroy(RssItem $slug)
     {
         //
     }

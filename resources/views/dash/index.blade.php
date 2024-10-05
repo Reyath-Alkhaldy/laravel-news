@@ -1,7 +1,4 @@
 <x-layout>
-    {{-- <x-slot:hello>
-        <h1>hello</h1>
-    </x-slot:hello> --}}
     @include('dash.layouts.sidebar')
     <!-- Trending Category Section -->
     <section id="trending-category" class="trending-category section">
@@ -20,13 +17,15 @@
                                         <div class="col-lg-4 border-start custom-border">
                                     @endif
                                     <div class="post-entry">
-                                        <a href="{{ route('news.show', $item->id) }}"><img src="{{ $item->image_url }}"
-                                                alt="" class="img-fluid"></a>
+                                        <a href="{{ route('news.show', $item->slug) }}"><img
+                                                src="{{ $item->image_url }}" alt="{{ $item->title }}" loading="lazy"
+                                                class="img-fluid"></a>
                                         <div class="post-meta"><span class="date">{{ $worldNews->name }}</span>
                                             <span class="mx-1">•</span>
                                             <span>{{ $item->pub_date }}</span>
                                         </div>
-                                        <h2><a href="{{ route('news.show', $item->id) }}">{{ $item->description }}</a></h2>
+                                        <h2><a href="{{ route('news.show', $item->slug) }}">{{ $item->title }}</a>
+                                        </h2>
                                     </div>
                                     @if (($loop->index + 1) % 3 == 0 || $loop->last)
                         </div>
@@ -44,8 +43,8 @@
                                             <li>
                                                 <a href="{{ route('news.show', $category->rssItems[0]) }}">
                                                     <span class="number">1</span>
-                                                    <h3>{{ $item->title }}</h3>
-                                                    <span class="author">{{$category->rssItems[0]->author}}</span>
+                                                    <h3>{{ $category->rssItems[0]->title }}</h3>
+                                                    <span class="author">{{ $category->rssItems[0]->author }}</span>
                                                 </a>
                                             </li>
                                         @endforeach
@@ -72,7 +71,7 @@
         <div class="container section-title" data-aos="fade-up">
             <div class="section-title-container d-flex align-items-center justify-content-between">
                 <h2>Sport</h2>
-                <p><a href="categories.html">See All Sport</a></p>
+                <p><a href="{{ route('news.categories.show', ['category' => $sports->slug]) }}">See All Sport</a></p>
             </div>
         </div><!-- End Section Title -->
 
@@ -86,11 +85,12 @@
                                     <div class="col-lg-4 border-start custom-border">
                                 @endif
                                 <div class="post-list">
-                                    <a href="{{ route('news.show', $item->id) }}l"><img src="{{ $item->image_url }}" alt=""
-                                            class="img-fluid"></a>
+                                    <a href="{{ route('news.show', $item->slug) }}"><img src="{{ $item->image_url }}" loading="lazy"
+                                            alt="{{ $item->title }}" class="img-fluid"></a>
                                     <div class="post-meta"><span class="date">{{ $sports->name }}</span> <span
                                             class="mx-1">•</span> <span>{{ $item->pub_date }}</span></div>
-                                    <h2><a href="{{ route('news.show', $item->id) }}"> {{ $item->description }}</a></h2>
+                                    <h2><a href="{{ route('news.show', $item->slug) }}"> {{ $item->title }}</a>
+                                    </h2>
                                 </div>
                                 @if (($loop->index + 1) % 3 == 0 || $loop->last)
                     </div>
@@ -111,7 +111,8 @@
         <div class="container section-title" data-aos="fade-up">
             <div class="section-title-container d-flex align-items-center justify-content-between">
                 <h2>Business</h2>
-                <p><a href="categories.html">See All Business</a></p>
+                <p><a href="{{ route('news.categories.show', ['category' => $business->slug]) }}">See All Business</a>
+                </p>
             </div>
         </div><!-- End Section Title -->
         <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -125,11 +126,12 @@
                                     <div class="col-lg-4 border-start custom-border">
                                 @endif
                                 <div class="post-list">
-                                    <a href="{{ route('news.show', $item->id) }}"><img src="{{ $item->image_url }}" alt=""
-                                            class="img-fluid"></a>
+                                    <a href="{{ route('news.show', $item->slug) }}"><img src="{{ $item->image_url }}" loading="lazy"
+                                            alt="{{ $item->title }}" class="img-fluid"></a>
                                     <div class="post-meta"><span class="date">{{ $business->name }}</span> <span
                                             class="mx-1">•</span> <span>{{ $item->pub_date }}</span></div>
-                                    <h2><a href="{{ route('news.show', $item->id) }}"> {{ $item->description }}</a></h2>
+                                    <h2><a href="{{ route('news.show', $item->slug) }}"> {{ $item->title }}</a>
+                                    </h2>
                                 </div>
                                 @if (($loop->index + 1) % 3 == 0 || $loop->last)
                     </div>
@@ -149,7 +151,8 @@
         <div class="container section-title" data-aos="fade-up">
             <div class="section-title-container d-flex align-items-center justify-content-between">
                 <h2>Technology</h2>
-                <p><a href="categories.html">See All Technology</a></p>
+                <p><a href="{{ route('news.categories.show', ['category' => $technology->slug]) }}">See All
+                        Technology</a></p>
             </div>
         </div><!-- End Section Title -->
 
@@ -164,11 +167,12 @@
                                     <div class="col-lg-4 border-start custom-border">
                                 @endif
                                 <div class="post-list">
-                                    <a href="{{ route('news.show', $item->id) }}"><img src="{{ $item->image_url }}" alt=""
-                                            class="img-fluid"></a>
-                                    <div class="post-meta"><span class="date">{{ $technology->name }}</span> <span
+                                    <a href="{{ route('news.show', $item->slug) }}"><img src="{{ $item->image_url }}" loading="lazy"
+                                            alt="{{ $item->title }}" class="img-fluid"></a>
+                                    <div class="post-meta"><span class="date">{{ $item->pub_date }}</span> <span
                                             class="mx-1">•</span> <span>{{ $item->pub_date }}</span></div>
-                                    <h2><a href="{{ route('news.show', $item->id) }}"> {{ $item->description }}</a></h2>
+                                    <h2><a href="{{ route('news.show', $item->slug) }}"> {{ $item->title }}</a>
+                                    </h2>
                                 </div>
                                 @if (($loop->index + 1) % 3 == 0 || $loop->last)
                     </div>

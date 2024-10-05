@@ -13,12 +13,12 @@ class RssItem extends Model
         'title',
         'description',
         'link',
-        // 'content',
         'image_url',
         'video_url',
         'author',
         'pub_date',
-        'category_id'
+        'category_id',
+        'slug'
     ];
 
     public function rssFeed()
@@ -41,5 +41,9 @@ class RssItem extends Model
             'id',
             'id',
         );
+    }
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 }

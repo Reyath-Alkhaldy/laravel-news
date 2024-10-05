@@ -4,14 +4,22 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="global news, political news, sports news, business news, technology news, latest news, news headlines, news websites, news aggregation, RSS, live news, today's news, economic news, tech news, news updates, world press, world news, news portals">
+    <meta name="description" content="A comprehensive platform providing the latest global, political, sports, business, and technology news from trusted sources worldwide. News is updated live via RSS feeds and professionally organized into categories. Get the latest updates from all sectors in one place.">
+    <meta property="og:title" content="News Summary - Latest Global, Political, Sports, Business, and Technology News">
+    <meta property="og:description" content="A platform providing the latest global news in various categories. Updated live via RSS feeds from trusted sources worldwide.">
+    <meta property="og:image" content="https://example.com/logo.png"> <!-- رابط إلى صورة الشعار أو صورة تعبر عن الموقع -->
+    <meta property="og:url" content="https://example.com">
+    <meta property="og:type" content="website">
+    <meta name="author" content="News Summary Team">
+    <meta name="language" content="en">
+    <meta name="copyright" content="© 2024 News Summary">
+    <meta http-equiv="refresh" content="300">
+    <meta name="theme-color" content="#007bff">
+    <meta name="rating" content="General">
+
     <title>{{ $title }}</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-
-    <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>

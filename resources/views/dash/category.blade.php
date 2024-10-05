@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="{{$categoryName}}">
 
     <!-- Page Title -->
     <div class="page-title position-relative">
@@ -29,7 +29,7 @@
                                     <article class="position-relative h-100">
 
                                         <div class="post-img position-relative overflow-hidden">
-                                            <img src="{{ $item->image_url ?? '' }}" class="img-fluid" alt="">
+                                            <img src="{{ $item->image_url ?? '' }}" loading="lazy" class="img-fluid" alt="{{ $item->title }}">
                                             <span class="post-date">{{ $item->pub_date }}</span>
                                         </div>
 
@@ -49,12 +49,12 @@
                                             </div>
 
                                             <p>
-                                                {{ $item->description }}
+                                                {!! $item->description !!}
                                             </p>
 
                                             <hr>
 
-                                            <a href="{{ route('news.show', $item->id) }}"
+                                            <a href="{{ route('news.show', $item->slug) }}"
                                                 class="readmore stretched-link"><span>Read
                                                     More</span><i class="bi bi-arrow-right"></i></a>
                                         </div>
