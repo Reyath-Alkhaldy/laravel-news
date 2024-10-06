@@ -18,7 +18,7 @@ class RssItemController
     public function index()
     {
         // $categoriesNames = ['World News', 'Top stories - Google News', 'U.S. News', 'Sports', 'Technology', 'Business'];
-        $categories = collect($this->rssItemRepository->get());
+        $categories = $this->rssItemRepository->get();
         $worldNews = $categories->firstWhere('name', 'World News');
         $USNews = $categories->firstWhere('name', 'U.S. News');
         $sports = $categories->firstWhere('name', 'Sports');
@@ -69,10 +69,10 @@ class RssItemController
     /**
      * Display the specified resource.
      */
-    public function show(RssItem $news)
+    public function show(string $news)
     {
         // dd($news);
-        $rssItem = $this->rssItemRepository->show(id: $news->id);
+        $rssItem = $this->rssItemRepository->show(slug: $news);
         return  view('dash.single-post', compact('rssItem'));
     }
 

@@ -1,15 +1,15 @@
-<x-layout title="{{$rssItem->title}}">
+<x-layout title="{{ $rssItem->title }}">
 
     <main class="main">
 
         <!-- Page Title -->
         <div class="page-title">
             <div class="container d-lg-flex justify-content-between align-items-center">
-                <h1 class="mb-2 mb-lg-0">{{$rssItem->title}}</h1>
+                <h1 class="mb-2 mb-lg-0">{{ $rssItem->title }}</h1>
                 <nav class="breadcrumbs">
                     <ol>
                         <li><a href="{{ route('news.index') }}">Home</a></li>
-                        <li class="current">{{$rssItem->category->name}}</li>
+                        <li class="current">{{ $rssItem->category->name }}</li>
                     </ol>
                 </nav>
             </div>
@@ -27,18 +27,20 @@
                             <article class="article">
 
                                 <div class="post-img">
-                                    <img src="{{$rssItem->image_url}}"  alt="{{ $rssItem->title }}" loading="lazy" class="img-fluid">
+                                    <img src="{{ $rssItem->image_url }}" alt="{{ $rssItem->title }}" loading="lazy"
+                                        class="img-fluid">
                                 </div>
 
-                                <h2 class="title">{{$rssItem->title}}</h2>
+                                <h2 class="title">{{ $rssItem->title }}</h2>
 
                                 <div class="meta-top">
                                     <ul>
                                         <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
                                                 href="blog-details.html">John Doe</a></li>
                                         <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
-                                                href="blog-details.html"><time datetime="2020-01-01">Jan 1,
-                                                    2022</time></a></li>
+                                                href="blog-details.html"><time
+                                                    datetime="{{ $rssItem->pub_date }}">{{ $rssItem->pub_date }}</time></a>
+                                        </li>
                                         <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
                                                 href="blog-details.html">12 Comments</a></li>
                                     </ul>
@@ -46,9 +48,9 @@
 
                                 <div class="content">
                                     <p>
-                                         {!! $rssItem->description !!}
+                                        {!! $rssItem->description !!}
                                     </p>
-                               
+
                                     {{-- <img src="assets/img/blog/blog-inside-post.jpg" class="img-fluid" alt=""> --}}
 
                                 </div><!-- End post content -->
