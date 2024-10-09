@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Category;
 use App\Models\Setting;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,7 +16,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // $this->app->bind('path.base', function () {
+        //     return base_path('public_html');
+
+        // });
+        // if (App::environment('production')) {
+        //     $this->app->instance('path.public', function () {
+        //         return base_path('public_html');
+        //     });
+        // }
     }
 
     /**

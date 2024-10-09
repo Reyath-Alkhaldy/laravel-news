@@ -11,16 +11,13 @@ Route::get('/fetch-rss/feedUrl', [RssFeedController::class, 'fetchAndStore']);
 // Route::get('/fetch-rss/feedUrl', [RssFeedController::class, 'fetchRssFeed']);
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 
 Route::group(['prefix' => '/'], function () {
     Route::resource('news/categories', CategoryController::class)->scoped()->names('news.categories');
 
-    Route::resource('/news', RssItemController::class)->scoped()->names('news');
-
+    Route::resource('/news', RssItemController::class)->scoped()->names('news')->except('index');
+    Route::get('/', [RssItemController::class, 'index']) ->name('news.index');
 });
 
 
