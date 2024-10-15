@@ -17,7 +17,10 @@ Route::group(['prefix' => '/'], function () {
     Route::resource('news/categories', CategoryController::class)->scoped()->names('news.categories');
 
     Route::resource('/news', RssItemController::class)->scoped()->names('news')->except('index');
-    Route::get('/', [RssItemController::class, 'index']) ->name('news.index');
+    Route::get('/', [RssItemController::class, 'index'])->name('news.index');
+    Route::get('/about',  function () {
+        return view('dash.about');
+    })->name('dash.about');
 });
 
 

@@ -16,6 +16,28 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+
+        // $this->app->bind('path.public', function() {
+        //     return realpath(base_path().'/../public_html');
+        //   });
+
+        // App::bind('path.public', function() {
+        //     return base_path().'/public_html';
+        // });
+        // $this->app->bind(
+        //     'Illuminate\Contracts\Auth\Registrar',
+        //     'App\Services\Registrar'
+        // );
+        // $this->app->bind('path.public', function() {
+        //     return base_path().'/public_html';
+        // });
+
+
+
+        // $this->app->bind('path.public', function () {
+        //     return base_path('public_html');
+        // });
+
         // $this->app->bind('path.base', function () {
         //     return base_path('public_html');
 
