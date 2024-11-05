@@ -1,5 +1,5 @@
 <footer id="footer" class="footer dark-background">
-
+  <script id="PDS910987" type="text/javascript">(function(d){var wrapper=d.createElement("script"); wrapper.id="WDS910987";wrapper.type="text/javascript";wrapper.src="https://s.adlane.info/?content_page_url=" + encodeURIComponent(window.location.href) + "&width=300&height=250&cb=" + (new Date()).getTime().toString() + "&aid=910987";var s=d.getElementById("PDS910987");s.parentNode.insertBefore(wrapper, s);}(document));</script>
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">

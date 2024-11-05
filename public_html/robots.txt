@@ -1,4 +1,3 @@
 User-agent: *
 Disallow: 
-Disallow: /
-Sitemap: https://new-news-summary.com/
+Sitemap: https://new-news-summary.com/sitemap.xml

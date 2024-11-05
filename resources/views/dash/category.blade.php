@@ -30,7 +30,7 @@
 
                                         <div class="post-img position-relative overflow-hidden">
                                             <img src="{{ $item->image_url ?? '' }}" loading="lazy" class="img-fluid" alt="{{ $item->title }}">
-                                            <span class="post-date">{{ $item->pub_date }}</span>
+                                            <span class="post-date">{{ $item->created_at }}</span>
                                         </div>
 
                                         <div class="post-content d-flex flex-column">

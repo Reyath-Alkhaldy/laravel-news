@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-// use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-// use Astrotomic\Translatable\Translatable;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 
 class Category extends Model
 {
@@ -46,15 +47,15 @@ class Category extends Model
     {
         return 'slug';
     }
+    public function toSitemapTag(): Url | string | array
+    {
+        // Simple return:
+        // return route('news.categories.show', $this);
+
+        // Return with fine-grained control:
+        return Url::create(route('news.categories.show', $this))
+            ->setLastModificationDate(Carbon::create($this->updated_at))
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_HOURLY)
+            ->setPriority(0.5);
+    }
 }
-
-
-
-
-// class Category extends Model implements TranslatableContract
-// {
-//     use Translatable,HasFactory;
-//     public $translatedAttributes = ['title', 'content'];
-//     protected $fillable = ['image','parent',];
-
-// }

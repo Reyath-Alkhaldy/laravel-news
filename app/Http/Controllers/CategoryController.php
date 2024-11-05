@@ -29,7 +29,7 @@ class CategoryController
     public function store(Request $request)
     {
         // return $request->all();
-      return  Category::create($request->all());
+    //   return  Category::create($request->all());
     }
 
     /**
@@ -38,7 +38,7 @@ class CategoryController
     public function show(Category $category)
     { 
         $categoryName = $category->name;
-        $rssItems = $category->rssItems()->paginate();
+        $rssItems = $category->rssItems()->latest()->paginate();
         // dd($rssItems);
         // return $rssItems;
         

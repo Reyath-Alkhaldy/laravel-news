@@ -34,10 +34,13 @@ Schedule::call(function () {
     // app(RssFeedController::class)->fetchAndStore('https://rss.cnn.com/rss/cnn_latest.rss');
     // app(RssFeedController::class)->fetchAndStore('http://feeds.reuters.com/reuters/topNews');
     app(RssFeedController::class)->fetchAndStore('https://feeds.skynews.com/feeds/rss/home.xml');
-})->everyMinute();
+})->everyThirtyMinutes();
+
+///
+Schedule::command('app:generate-news-sitemap')->everyThirtyMinutes();
+
 
 // protected function schedule(Schedule $schedule)
-// {
 //     $schedule->call(function () {
 //         app(RssFeedController::class)->fetchAndStore('https://example.com/rss');
 //     })->hourly();  // الجلب كل ساعة

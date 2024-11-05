@@ -22,7 +22,7 @@
                                                 class="img-fluid"></a>
                                         <div class="post-meta"><span class="date">{{ $worldNews->name }}</span>
                                             <span class="mx-1">•</span>
-                                            <span>{{ $item->pub_date }}</span>
+                                            <span>{{ $item->created_at }}</span>
                                         </div>
                                         <h2><a href="{{ route('news.show', $item->slug) }}">{{ $item->title }}</a>
                                         </h2>
@@ -85,12 +85,13 @@
                                     <div class="col-lg-4 border-start custom-border">
                                 @endif
                                 <div class="post-list">
-                                    <a href="{{ route('news.show', $item->slug) }}"><img src="{{ $item->image_url }}" loading="lazy"
-                                            alt="{{ $item->title }}" class="img-fluid"></a>
+                                    <a href="{{ route('news.show', $item->slug) }}"><img src="{{ $item->image_url }}"
+                                            loading="lazy" alt="{{ $item->title }}" class="img-fluid"></a>
                                     <div class="post-meta"><span class="date">{{ $sports->name }}</span> <span
-                                            class="mx-1">•</span> <span>{{ $item->pub_date }}</span></div>
-                                    <h2><a href="{{ route('news.show', $item->slug) }}"> {{ $item->title }}</a>
-                                    </h2>
+                                            class="mx-1">•</span> <span>{{ $item->created_at }}</span></div>
+                                    <a href="{{ route('news.show', $item->slug) }}">
+                                        <h2> {{ $item->title }} </h2>
+                                    </a>
                                 </div>
                                 @if (($loop->index + 1) % 3 == 0 || $loop->last)
                     </div>
@@ -126,10 +127,10 @@
                                     <div class="col-lg-4 border-start custom-border">
                                 @endif
                                 <div class="post-list">
-                                    <a href="{{ route('news.show', $item->slug) }}"><img src="{{ $item->image_url }}" loading="lazy"
-                                            alt="{{ $item->title }}" class="img-fluid"></a>
+                                    <a href="{{ route('news.show', $item->slug) }}"><img src="{{ $item->image_url }}"
+                                            loading="lazy" alt="{{ $item->title }}" class="img-fluid"></a>
                                     <div class="post-meta"><span class="date">{{ $business->name }}</span> <span
-                                            class="mx-1">•</span> <span>{{ $item->pub_date }}</span></div>
+                                            class="mx-1">•</span> <span>{{ $item->created_at }}</span></div>
                                     <h2><a href="{{ route('news.show', $item->slug) }}"> {{ $item->title }}</a>
                                     </h2>
                                 </div>
@@ -167,10 +168,10 @@
                                     <div class="col-lg-4 border-start custom-border">
                                 @endif
                                 <div class="post-list">
-                                    <a href="{{ route('news.show', $item->slug) }}"><img src="{{ $item->image_url }}" loading="lazy"
-                                            alt="{{ $item->title }}" class="img-fluid"></a>
-                                    <div class="post-meta"><span class="date">{{ $item->pub_date }}</span> <span
-                                            class="mx-1">•</span> <span>{{ $item->pub_date }}</span></div>
+                                    <a href="{{ route('news.show', $item->slug) }}"><img src="{{ $item->image_url }}"
+                                            loading="lazy" alt="{{ $item->title }}" class="img-fluid"></a>
+                                    <div class="post-meta"><span class="date">{{ $item->created_at }}</span> <span
+                                            class="mx-1">•</span> <span>{{ $item->created_at }}</span></div>
                                     <h2><a href="{{ route('news.show', $item->slug) }}"> {{ $item->title }}</a>
                                     </h2>
                                 </div>

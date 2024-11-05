@@ -19,13 +19,15 @@
     <meta name="theme-color" content="#007bff">
     <meta name="rating" content="General">
     <meta name="google-site-verification" content="0Tjrd3wJEQNYAuKllVjSzj8HR4ub9Rn1wAVWqo1ZEvI" />
+    <meta name="adlane" content="5e75df21b19819bdfdc1e1f27bb91791"/>
     <title>Global News Summary</title>
     <link rel="icon" href="{{ asset('assets/logo/global_news_summary.webp') }}" type="image/svg+xml">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect" crossorigin>
-    <link
+    <meta name="msvalidate.01" content="E9BD88D01510779684C6C96C23414FA8" />
+    {{-- <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap"
-        rel="stylesheet">
+        rel="stylesheet"> --}}
 
     <!-- Vendor CSS Files -->
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -40,7 +42,8 @@
 <body class="index-page">
 
     @include('dash.layouts.header')
-    <main class="main">
+    <main class="main"> 
+        <script id="PDS910987" type="text/javascript">(function(d){var wrapper=d.createElement("script"); wrapper.id="WDS910987";wrapper.type="text/javascript";wrapper.src="https://s.adlane.info/?content_page_url=" + encodeURIComponent(window.location.href) + "&width=300&height=250&cb=" + (new Date()).getTime().toString() + "&aid=910987";var s=d.getElementById("PDS910987");s.parentNode.insertBefore(wrapper, s);}(document));</script>
         {{ $slot }}
     </main>
 
